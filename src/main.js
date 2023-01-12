@@ -151,8 +151,8 @@ function changered(clicked_id) {
     color[0].src = "images/tshirts/redshirt.jpg";
     colorhover[0].src = "images/tshirts/redshirthover.webp";
   }  else if (clicked_id === "color-id-2") {
-    color[0].src = "images/whiteshirt.webp";
-    colorhover[0].src = "images/whiteshirthover.webp";
+    color[1].src = "images/whiteshirt.webp";
+    colorhover[1].src = "images/whiteshirthover.webp";
   } else if (clicked_id === "color-id-3") {
     color[2].src = "images/sweater/redsweater.webp";
     colorhover[2].src = "images/sweater/redsweaterhover.webp";
@@ -173,8 +173,8 @@ function changewhite(clicked_id) {
     color[0].src = "images/tshirts/whiteshirt.webp";
     colorhover[0].src = "images/tshirts/whiteshirthover.webp";
   } else if (clicked_id === "color-id-2") {
-    color[0].src = "images/whiteshirt.webp";
-    colorhover[0].src = "images/whiteshirthover.webp";
+    color[1].src = "images/whiteshirt.webp";
+    colorhover[1].src = "images/whiteshirthover.webp";
   } else if (clicked_id === "color-id-3") {
     color[2].src = "images/sweater/whitesweater.webp";
     colorhover[2].src = "images/sweater/whitesweaterhoverr.webp";
@@ -194,8 +194,8 @@ function changegreen(clicked_id) {
     color[0].src = "images/tshirts/greenshirt.webp";
     colorhover[0].src = "images/tshirts/greenshirthover.jpg";
   } else if (clicked_id === "color-id-2") {
-    color[0].src = "images/whiteshirt.webp";
-    colorhover[0].src = "images/whiteshirthover.webp";
+    color[1].src = "images/whiteshirt.webp";
+    colorhover[1].src = "images/whiteshirthover.webp";
   } else if (clicked_id === "color-id-3") {
     color[2].src = "images/sweater/greensweater.webp";
     colorhover[2].src = "images/sweater/greensweaterhover.webp";
@@ -216,8 +216,8 @@ function changeblue(clicked_id) {
     color[0].src = "images/tshirts/blueshirt.webp";
     colorhover[0].src = "images/tshirts/blueshirthover.webp";
   } else if (clicked_id === "color-id-2") {
-    color[0].src = "images/whiteshirt.webp";
-    colorhover[0].src = "images/whiteshirthover.webp";
+    color[1].src = "images/whiteshirt.webp";
+    colorhover[1].src = "images/whiteshirthover.webp";
   } else if (clicked_id === "color-id-3") {
     color[2].src = "images/sweater/bluesweater.webp";
     colorhover[2].src = "images/sweater/bluesweaterhover.webp";
