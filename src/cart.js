@@ -4,152 +4,156 @@ let content = document.getElementById("content-el");
 
 
 let basket = JSON.parse(localStorage.getItem("data")) || [];
-// let clothatributes = JSON.parse(localStorage.getItem("clothatributes")) || [];
-// console.log(clothatributes);
+
+function getKeyByValue(object, value) {
+    return Object.keys(object).find(key => object[key] === value);
+}
 
 removeall = () => {
-  basket = [];
-  clothatributes = [];
-  localStorage.setItem("data", JSON.stringify(basket));
-  localStorage.setItem("clothatributes", JSON.stringify(clothatributes));
-  ShoppingCart.innerHTML = "";
-  calculation();
+    basket = [];
+    clothatributes = [];
+    localStorage.setItem("data", JSON.stringify(basket));
+    localStorage.setItem("clothatributes", JSON.stringify(clothatributes));
+    ShoppingCart.innerHTML = "";
+    update();
 };
 
 
-
-
-
-
-let calculation = () => {
-  let cartIcon = document.getElementById("cartAmount");
-  cartIcon.innerHTML = basket.map((x) => x.item).reduce((x, y) => x + y, 0);
+let update = () => {
+    let whole_amount = 0
+    for (let i = 0; i < basket.length; i++) {
+        whole_amount += parseInt(basket[i].amount)
+    }
+    let cartIcon = document.getElementById("cartAmount");
+    cartIcon.innerHTML = whole_amount.toString()
 };
 
-calculation();
-
-
-
+update()
 
 
 let generateCartItems = () => {
-  if (basket.length !== 0 /* && clothatributes.length !== 0 */ ) {
-    return (ShoppingCart.innerHTML = basket // && clothatributes
-      .map((x) => {
-        let { id, item, size, color } = x;
-        let search = shopItemsData.find((x) => x.id === id) || [];
-        let { img, price, name } = search;
-        return `
+    if (basket.length !== 0 /* && clothatributes.length !== 0 */) {
+        return (ShoppingCart.innerHTML = basket // && clothatributes
+            .map((x) => {
+                let {id, color, size, pimid, amount,} = x;
+                let search = shopItemsData.find(x => x.id === id)||[] ;
+                let {img, price, name, desc} = search;
+                return `
         <div class="cart-container">
       <div class="cart-item">
-      <img class="cart-pic" src=${color} alt="" />
-      
+      <img class="cart-pic" src="${get_img(pimid, color)}" alt="" />
+
       <div class="details-cart">
-      
+
       <div class="title-price-x">
       <h4 class="title-price">
       <p>${name}</p>
-      <p class="cart-item-price">${item * price} €  Größe: ${size}  </p>
+      <p class="cart-item-price">${price} €  Größe: ${Sizes_invert[size]}  </p>
       </h4>
-      <i onclick="removeItem(${id})"class="close-el">x</i>
-      </div>  
-      <p class="cart-desc"> Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+      <i onclick="removeItem(${id}, ${color}, ${size})" class="close-el">x</i>
+      </div>
+      <p class="cart-desc">${desc}</p>
       <div class="cart-buttons">
       <div class="buttons">
-      <i onclick="decrement(${id})" class="dash-el">-</i>
-      <div id=${id} class="quantity">${item}</div>
-      <i onclick="increment(${id})" class="plus-el">+</i>
+      <i onclick="decrement(${id}, ${color}, ${size})" class="dash-el">-</i>
+      <div id=${id} class="quantity">${amount}</div>
+      <i onclick="increment(${id}, ${color}, ${size})" class="plus-el">+</i>
+      <span>Gesamtpreis ${amount * price}€</span>
       </div>
       </div>
-      </div>  
+      </div>
       </div>
       </div>
       `;
-      })
-      .join(""));
-  } else {
-    ShoppingCart.style.display = "none";
-    content.style.display = "block";
-    label.innerHTML = `
+            })
+            .join(""));
+    } else {
+        ShoppingCart.style.display = "none";
+        content.style.display = "block";
+        label.innerHTML = `
     <h2>Keine Artikel vorhanden</h2>
     <a href="index.html">
       <button class="HomeBtn">Back to Home</button>
     </a>
     `;
-  }
+    }
 };
 
 generateCartItems();
 
 
+let increment = (id, color, size) => {
+    id = id[0].id
+    color = color.toString()
+    size = size.toString()
+    let search = basket.find((x) => x.id === id && x.color === color && x.size === size);
 
-let increment = (id) => {
-  let selectedItem = id;
-  let search = basket.find((x) => x.id === selectedItem.id);
+    if (search === undefined) {
+        console.log("Das sollte eh nie passieren");
+    } else {
+        search.amount += 1;
+    }
 
-  if (search === undefined) {
-    basket.push({
-      id: selectedItem.id,
-      item: 1,
-    });
-  } else {
-    search.item += 1;
-  }
-
-  generateCartItems();
-  update(selectedItem.id);
-  localStorage.setItem("data", JSON.stringify(basket));
+    generateCartItems();
+    update();
+    TotalAmount();
+    localStorage.setItem("data", JSON.stringify(basket));
 };
 
 
-let decrement = (id) => {
-  let selectedItem = id;
-  let search = basket.find((x) => x.id === selectedItem.id);
+let decrement = (id, color, size) => {
+    id = id[0].id
+    color = color.toString()
+    size = size.toString()
+    console.log(id, color, size)
+    let search = basket.find((x) => x.id === id && x.color === color && x.size === size);
 
-  if (search === undefined) return;
-  else if (search.item === 0) return;
-  else {
-    search.item -= 1;
-  }
+    if (search === undefined) return;
+    else if (search.item === 0) return;
+    else {
+        search.amount -= 1;
+    }
 
-  update(selectedItem.id);
-  basket = basket.filter((x) => x.item !== 0);
-  generateCartItems();
-  localStorage.setItem("data", JSON.stringify(basket));
+    update();
+    TotalAmount();
+    basket = basket.filter((x) => x.amount !== 0);
+    generateCartItems();
+    localStorage.setItem("data", JSON.stringify(basket));
 };
 
-
-let update = (id) => {
-  let search = basket.find((x) => x.id === id);
-  document.getElementById(id).innerHTML = search.item;
-  calculation();
-  TotalAmount();
+let removeItem = (id, color, size) => {
+    console.log(id, color, size)
+    if (HTMLCollection.prototype.isPrototypeOf(id))
+        id = id[0].id
+    else
+        id = id.id
+    color = color.toString()
+    size = size.toString()
+    basket = basket.filter((x) => !(x.id === id && x.color === color && x.size === size));
+    update();
+    generateCartItems();
+    TotalAmount();
+    localStorage.setItem("data", JSON.stringify(basket));
 };
-
-
-let removeItem = (id) => {
-  let selectedItem = id;
-  basket = basket.filter((x) => x.id !== selectedItem.id);
-  calculation();
-  generateCartItems();
-  TotalAmount();
-  localStorage.setItem("data", JSON.stringify(basket));
-};
-
 
 
 let TotalAmount = () => {
-  if (basket.length !== 0) {
-    let amount = basket
-      .map((x) => {
-        let { id, item } = x;
-        let filterData = shopItemsData.find((x) => x.id === id);
-        return filterData.price * item;
-      })
-      .reduce((x, y) => x + y, 0);
+    if (basket.length !== 0) {
+        let whole_amount = basket
+            .map((x) => {
+                let {id, amount} = x;
+                let filterData = shopItemsData.find((x) => x.id === id);
+                return filterData.price * amount;
+            })
+            .reduce((x, y) => x + y, 0);
 
-    return (label.innerHTML = `
-    <div class="totalbill-container"> <h2>Summe: (${basket.length} Artikel)  ${amount} €</h2>
+        let whole_item_cnt = basket
+            .map((x) => {
+                let {id, amount} = x;
+                return amount;
+            }).reduce((a, b) => a + b)
+        return (label.innerHTML = `
+    <div class="totalbill-container"> <h2>Summe: (${whole_item_cnt} Artikel)  ${whole_amount} €</h2>
     <button onclick="checkOut()" class="checkout">Checkout</button>
     </div>
     <div class="adress-container">
@@ -180,15 +184,73 @@ let TotalAmount = () => {
       <p id="plzText">23966, Wismar</p>
       </div>
     </div>
-    
+
     `);
-  } else return;
+    } else return;
 };
 
+function get_img(pim_id, color_id) {
+    color_id = parseInt(color_id)
+    if (pim_id === 1) {
+        if (color_id === Color.Red) {
+            return "images/tshirts/redshirt.jpg";
+        }
+        if (color_id === Color.White) {
+            return "images/tshirts/whiteshirt.webp";
+        }
+        if (color_id === Color.Green) {
+            return "images/tshirts/greenshirt.webp";
+        }
+        if (color_id === Color.Blue) {
+            return "images/tshirts/blueshirt.webp";
+        }
+    }
+    if (pim_id === 2) {
+        if (color_id === Color.Red) {
+            return "images/sweater/redsweater.webp";
+        }
+        if (color_id === Color.White) {
+            return "images/sweater/whitesweater.webp";
+        }
+        if (color_id === Color.Green) {
+            return "images/sweater/greensweater.webp";
+        }
+        if (color_id === Color.Blue) {
+            return "images/sweater/bluesweater.webp";
+        }
+    }
+    if (pim_id === 3) {
+        if (color_id === Color.Red) {
+            return "images/jacket/redjacket.webp";
+        }
+        if (color_id === Color.White) {
+            return "images/jacket/whitejacket.webp";
+        }
+        if (color_id === Color.Green) {
+            return "images/jacket/greenjacket.jpg";
+        }
+        if (color_id === Color.Blue) {
+            return "images/jacket/bluejacket.jpg";
+        }
+    }
+    if (pim_id === 4) {
+        if (color_id === Color.Red) {
+            return "images/pullover/redpullover.webp";
+        }
+        if (color_id === Color.White) {
+            return "images/pullover/whitepullover.webp";
+        }
+        if (color_id === Color.Green) {
+            return "images/pullover/greenpullover.webp";
+        }
+        if (color_id === Color.Blue) {
+            return "images/pullover/bluepullover.webp";
+        }
+    }
+    //TODO hier einmal für alle pimid´s und alle color ids copy pasten
+}
 
 TotalAmount();
-
-
 
 
 var modal = document.getElementById("myModal");
@@ -197,36 +259,36 @@ var btn = document.getElementById("myBtn");
 
 var span = document.getElementsByClassName("close")[0];
 
-btn.onclick = function() {
-  modal.style.display = "block";
+btn.onclick = function () {
+    modal.style.display = "block";
 }
 
-span.onclick = function() {
-  modal.style.display = "none";
-}
-
-window.onclick = function(event) {
-  if (event.target == modal) {
+span.onclick = function () {
     modal.style.display = "none";
-  }
+}
+
+window.onclick = function (event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
 }
 
 
 function adress() {
-  let name = document.getElementById("name").value;
-  let adress = document.getElementById("adress").value;
-  let plz = document.getElementById("plz").value;
-  let ort = document.getElementById("ort").value;
-  document.getElementById("nameText").textContent = name;
-  document.getElementById("adressText").textContent = adress;
-  document.getElementById("plzText").textContent = plz + ", " + ort;
-  modal.style.display = "none";
+    let name = document.getElementById("name").value;
+    let adress = document.getElementById("adress").value;
+    let plz = document.getElementById("plz").value;
+    let ort = document.getElementById("ort").value;
+    document.getElementById("nameText").textContent = name;
+    document.getElementById("adressText").textContent = adress;
+    document.getElementById("plzText").textContent = plz + ", " + ort;
+    modal.style.display = "none";
 }
 
 function checkOut() {
- if (basket.length !== 0) {
-    alert("Vielen Dank für Ihre Bestellung!");
-  } else {
-    alert("Bitte wählen Sie mindestens ein Produkt aus");
-  }
+    if (basket.length !== 0) {
+        alert("Vielen Dank für Ihre Bestellung!");
+    } else {
+        alert("Bitte wählen Sie mindestens ein Produkt aus");
+    }
 }

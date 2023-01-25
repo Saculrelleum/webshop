@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Startseite</title>
+    <link rel="stylesheet" href="src/css/style.css">
+</head>
+<body>
+    <div class="navbar">
+        <a href="index.html">
+          <h2>Clothes for Humans</h2>
+        </a>
+    
+        <a href="cart.html">
+          <div class="cart">
+            <img src="images/cart.png" alt="">
+            <div id="cartAmount" class="cartAmount">0</div>
+          </div>
+        </a>    
+      </div>
+      <div class="frontpage">
+        <h1>Neue Sommer Kollektion</h1>
+        <p>Heute bestellen und dein Paket morgen oder übermorgen erhalten</p>
+        <div class="frontpage-image-container">
+            <button class="Left-click" onclick="plusDivs(-1)">&#10094;</button>
+            <button class="Right-click" onclick="plusDivs(1)">&#10095;</button>
+            <img id="frontpage-image"  class="mySlides" src="images/frontpage/Frontpage1.jpg" alt="">
+            <img id="frontpage-image"  class="mySlides" src="images/frontpage/Frontpage2.jpg" alt="">
+            <img id="frontpage-image"  class="mySlides" src="images/frontpage/Frontpage3.jpg" alt="">
+            <img id="frontpage-image"  class="mySlides" src="images/frontpage/Frontpage4.jpg" alt="">
+            <img id="frontpage-image"  class="mySlides" src="images/frontpage/Frontpage5.jpg" alt="">
+            <img id="frontpage-image"  class="mySlides" src="images/frontpage/Frontpage6.jpg" alt="">
+            <button class="buy-now" onclick="window.location.href='index.html'">Jetzt kaufen</button>
+        </div>
+    </div>
+    <div class="footer">
+        <a href="impressum.html">Impressum</a>
+
+    </div>
+    
+    
+</body>
+<script>
+    var slideIndex = 1;
+        showDivs(slideIndex);
+        
+        function plusDivs(n) {
+          showDivs(slideIndex += n);
+        }
+        
+        function showDivs(n) {
+          var i;
+          var x = document.getElementsByClassName("mySlides");
+          if (n > x.length) {slideIndex = 1}
+          if (n < 1) {slideIndex = x.length}
+          for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";  
+          }
+          x[slideIndex-1].style.display = "block";  
+        }
+
+    var myIndex = 0;
+    carousel();
+
+function carousel() {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";  
+  }
+  myIndex++;
+  if (myIndex > x.length) {myIndex = 1}    
+  x[myIndex-1].style.display = "block";  
+  setTimeout(carousel, 2500); 
+}
+
+</script>
+</html>

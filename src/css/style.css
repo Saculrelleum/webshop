@@ -441,3 +441,165 @@ a {
   background-color: rgb(88, 102, 116);
   margin-left: 5px;
 }
+
+/* Impresum */
+
+.Impressum {
+  display: grid;
+  grid-template-columns: repeat(2, 40%);
+  justify-content: center;
+  gap: 50px;
+  
+  
+
+  
+}	
+
+.Impressum h1 {
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.Impressum p {
+  font-size: 16px;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+
+.Impressum h2 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.Kontakt, .Haftung {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 17px;
+  margin-top: 20px; 
+
+}
+
+/* Frontpage */
+
+.frontpage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background-color: #fff;
+  width: 700px;
+  margin: 0 auto;
+  padding-bottom: 35px;
+
+
+}
+
+.frontpage h1 {
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  margin-top: 15px;
+}
+
+.frontpage p {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  width: 600px;
+  text-align: center;
+}
+
+#frontpage-image {
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+
+}
+
+
+
+
+.frontpage-image-container {
+  position: relative;
+ 
+}
+
+.Left-click {
+  position: absolute;
+  top: 50%;
+  left: 4%;
+  transform: translateY(-50%);
+  z-index: 3;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 20px;
+  background-color: rgba(0, 0, 0, 0);
+  border: none
+}
+
+.Right-click {
+  position: absolute;
+  top: 50%;
+  right: 4%;
+  transform: translateY(-50%);
+  z-index: 3;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 20px;
+  background-color: rgba(0, 0, 0, 0);
+  border: none
+}
+
+/* Footer */
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #212529;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  font-size: 14px;
+  font-weight: 300;
+
+}
+
+.footer a {
+  
+  text-decoration: none;
+}
+
+.footer a:hover {
+  color: #21b1f9;
+}
+
+.buy-now {
+  position: absolute;
+  background-color: #212529;
+  color: white;
+  border: none;
+  padding: 7px;
+  border-radius: 4px;
+  cursor: pointer;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -22px;
+  
+}
+
+.add-btn {
+  background-color: #131921;
+  color: white;
+  border: none;
+  padding: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+  vertical-align: auto;
+  
+}
