@@ -83,7 +83,11 @@ generateCartItems();
 
 
 let increment = (id, color, size) => {
-    id = id[0].id
+    if (HTMLCollection.prototype.isPrototypeOf(id)) {
+        id = id[0].id
+    } else {
+        id = id.id
+    }
     color = color.toString()
     size = size.toString()
     let search = basket.find((x) => x.id === id && x.color === color && x.size === size);
@@ -102,7 +106,12 @@ let increment = (id, color, size) => {
 
 
 let decrement = (id, color, size) => {
-    id = id[0].id
+    if (HTMLCollection.prototype.isPrototypeOf(id)) {
+        id = id[0].id
+    }
+    else {
+        id = id.id
+    }
     color = color.toString()
     size = size.toString()
     console.log(id, color, size)

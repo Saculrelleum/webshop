@@ -484,38 +484,79 @@ a {
 /* Frontpage */
 
 .frontpage {
+  display: grid;
+  grid-template-columns: repeat(2, 600px);
+  justify-content: center;
+  margin-top: 50px;
+  
+  
+
+}
+
+.text-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  border-radius: 8px;
+  align-items: center;
   background-color: #fff;
-  width: 700px;
-  margin: 0 auto;
-  padding-bottom: 35px;
-
-
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+  
 }
 
-.frontpage h1 {
-  font-size: 30px;
+.text-container h1 {
+  font-size: 40px;
   font-weight: bold;
-  margin-bottom: 20px;
-  margin-top: 15px;
+  margin-bottom: 30px;
 }
 
-.frontpage p {
+.text-container p {
   font-size: 16px;
-  font-weight: bold;
+  font-weight: 300;
   margin-bottom: 20px;
-  width: 600px;
-  text-align: center;
+  width: 400px;
+  text-align: justify;
+}
+
+.buy-now {
+  background-color: #212529;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 14;
+  font-weight: bold;
+  cursor: pointer;
+  
+}
+
+.buy-now:hover {
+  background-color: #242e3b;
+}
+
+.buy-now:active {
+  background-color: #242e3b;
+  padding: 6px;
+}
+
+
+
+
+
+
+
+
+.frontpage-image-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
 }
 
 #frontpage-image {
   object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 20px;
+  border-top-right-radius: 10px;
   width: 100%;
 
 }
@@ -523,36 +564,36 @@ a {
 
 
 
-.frontpage-image-container {
-  position: relative;
- 
+.clothes-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 7px;
+  background-color: #fff;
+  border-bottom-right-radius: 10px;
 }
 
-.Left-click {
-  position: absolute;
-  top: 50%;
-  left: 4%;
-  transform: translateY(-50%);
-  z-index: 3;
-  cursor: pointer;
+.show-tshirt, .show-sweatshirt, .show-jacket {
+  color: gray;
+  font-size: 14px;
   font-weight: bold;
-  font-size: 20px;
-  background-color: rgba(0, 0, 0, 0);
-  border: none
+  border: none;
+  padding: 7px;
+  background-color: #fff;
+  cursor: pointer;
+  margin: 10px;
+  margin-left: 15px;
+  
+
+
 }
 
-.Right-click {
-  position: absolute;
-  top: 50%;
-  right: 4%;
-  transform: translateY(-50%);
-  z-index: 3;
-  cursor: pointer;
-  font-weight: bold;
-  font-size: 20px;
-  background-color: rgba(0, 0, 0, 0);
-  border: none
+.show-tshirt:hover, .show-sweatshirt:hover, .show-jacket:hover {
+  color: #131921;
 }
+
 
 /* Footer */
 
@@ -577,20 +618,6 @@ a {
 
 .footer a:hover {
   color: #21b1f9;
-}
-
-.buy-now {
-  position: absolute;
-  background-color: #212529;
-  color: white;
-  border: none;
-  padding: 7px;
-  border-radius: 4px;
-  cursor: pointer;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: -22px;
-  
 }
 
 .add-btn {

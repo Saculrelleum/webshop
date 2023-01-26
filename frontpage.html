@@ -21,18 +21,32 @@
         </a>    
       </div>
       <div class="frontpage">
-        <h1>Neue Sommer Kollektion</h1>
-        <p>Heute bestellen und dein Paket morgen oder übermorgen erhalten</p>
+        <div class="text-container">  
+          <h1>Clothes <br> for Humans</h1>
+          <p>Entdecken Sie die neueste Kollektion in unserem Online-Shop! Unsere neuesten Styles, Farben und Designs werden Sie begeistern. Ob elegant, casual oder sportlich - wir haben für jeden Geschmack etwas dabei. Verpassen Sie nicht die Chance, die neuesten Trends zu ergattern und Ihren Kleiderschrank aufzufrischen. Stöbern Sie jetzt durch unsere neue Kollektion und bestellen Sie noch heute Ihre Lieblingsstücke.
+          </p>
+          <button class="buy-now" onclick="window.location.href='index.html'">Jetzt kaufen</button>
+        </div>
         <div class="frontpage-image-container">
-            <button class="Left-click" onclick="plusDivs(-1)">&#10094;</button>
-            <button class="Right-click" onclick="plusDivs(1)">&#10095;</button>
+          <div id="shirtimages">
             <img id="frontpage-image"  class="mySlides" src="images/frontpage/Frontpage1.jpg" alt="">
             <img id="frontpage-image"  class="mySlides" src="images/frontpage/Frontpage2.jpg" alt="">
             <img id="frontpage-image"  class="mySlides" src="images/frontpage/Frontpage3.jpg" alt="">
+          </div>
+          <div id="sweatshirtimages">
             <img id="frontpage-image"  class="mySlides" src="images/frontpage/Frontpage4.jpg" alt="">
             <img id="frontpage-image"  class="mySlides" src="images/frontpage/Frontpage5.jpg" alt="">
             <img id="frontpage-image"  class="mySlides" src="images/frontpage/Frontpage6.jpg" alt="">
-            <button class="buy-now" onclick="window.location.href='index.html'">Jetzt kaufen</button>
+          </div>
+            <img id="frontpage-image"  class="mySlides" src="images/frontpage/Frontpage7.jpg" alt="">
+            <img id="frontpage-image"  class="mySlides" src="images/frontpage/Frontpage8.jpg" alt="">
+            <img id="frontpage-image"  class="mySlides" src="images/frontpage/Frontpage9.jpg" alt="">
+            <div class="clothes-btn">
+                <button id="shirt" class="show-tshirt" onclick="carousel(this.id)">T-shirts</button>
+                <button id="sweatshirt" class="show-sweatshirt" onclick="showImage(this.id)">Sweatshirts</button>
+                <button id="jacket" class="show-jacket" onclick="showImage(this.id)">Jacken</button>
+
+            </div>
         </div>
     </div>
     <div class="footer">
@@ -42,39 +56,5 @@
     
     
 </body>
-<script>
-    var slideIndex = 1;
-        showDivs(slideIndex);
-        
-        function plusDivs(n) {
-          showDivs(slideIndex += n);
-        }
-        
-        function showDivs(n) {
-          var i;
-          var x = document.getElementsByClassName("mySlides");
-          if (n > x.length) {slideIndex = 1}
-          if (n < 1) {slideIndex = x.length}
-          for (i = 0; i < x.length; i++) {
-            x[i].style.display = "none";  
-          }
-          x[slideIndex-1].style.display = "block";  
-        }
-
-    var myIndex = 0;
-    carousel();
-
-function carousel() {
-  var i;
-  var x = document.getElementsByClassName("mySlides");
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";  
-  }
-  myIndex++;
-  if (myIndex > x.length) {myIndex = 1}    
-  x[myIndex-1].style.display = "block";  
-  setTimeout(carousel, 2500); 
-}
-
-</script>
+<script src="src/frontpage.js"></script>
 </html>
